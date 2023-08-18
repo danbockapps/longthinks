@@ -1,9 +1,15 @@
 from flask import Flask
 
+from get_games.lichess import get_games
+from parse_games import parse_games
+
 app = Flask(__name__)
 
+@app.route('/<user>')
+def get_thinks(user):
+    pgn = get_games(user)
+    thinks = parse_games(pgn, user)
+    return thinks
 
-@app.route("/")
-def hello_world():
-    print("Hello, World!")
-    return "Hello, World!"
+if __name__ == '__main__':
+    app.run(port=5001, debug=True)
