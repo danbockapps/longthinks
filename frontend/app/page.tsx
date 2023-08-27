@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Enter from './Enter'
 import Boards from './Boards'
+import { StyledEngineProvider } from '@mui/joy'
 
 export type Think = [string, number]
 
@@ -25,9 +26,12 @@ export default function Home() {
   }
 
   return (
-    <main className='container mx-auto'>
-      <Enter {...{ onSubmit, loading }} />
-      <Boards {...{ thinks }} />
-    </main>
+    <StyledEngineProvider injectFirst>
+      {/* ☝️ Gives Tailwind css precedence over MUI */}
+      <main className='container mx-auto'>
+        <Enter {...{ onSubmit, loading }} />
+        <Boards {...{ thinks }} />
+      </main>
+    </StyledEngineProvider>
   )
 }
