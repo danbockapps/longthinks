@@ -1,6 +1,6 @@
-import { FC, useEffect, useState } from 'react'
-
-export type Think = [string, number]
+import { FC } from 'react'
+import { Think } from './page'
+import { Card } from '@mui/joy'
 
 const getGameId = (url: string) => {
   const parts = url.split('/')
@@ -12,19 +12,17 @@ const getUrl = (url: string, ply: number) =>
     ply % 2 === 0 ? 'white' : 'black'
   }?theme=auto&bg=auto#${ply}`
 
-const Boards: FC = () => {
-  const [data, setData] = useState<Think[]>([])
+interface Props {
+  thinks: Think[]
+}
 
-  useEffect(() => {
-    fetch('https://danbock.net/longthinksapi/danbock')
-      .then(response => response.json())
-      .then(({ thinks }) => setData(thinks))
-  }, [])
-
+const Boards: FC<Props> = props => {
   return (
-    <div>
-      {data.map(([url, ply], i) => (
-        <iframe className='lichess-iframe' key={i} src={getUrl(url, ply)} />
+    <div className='mt-10 flex flex-col items-center'>
+      {props.thinks.map(([url, ply], i) => (
+        <Card key={i} className='mt-5'>
+          <iframe className='lichess-iframe' src={getUrl(url, ply)} />
+        </Card>
       ))}
     </div>
   )
