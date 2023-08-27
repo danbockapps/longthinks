@@ -9,6 +9,11 @@ const getGameId = (url: string) => {
   return parts[parts.length - 1]
 }
 
+const getUrl = (url: string, ply: number) =>
+  `https://lichess.org/embed/game/${getGameId(url)}/${
+    ply % 2 === 0 ? 'white' : 'black'
+  }?theme=auto&bg=auto#${ply}`
+
 const Boards: FC = () => {
   const [data, setData] = useState<Think[]>([])
 
@@ -21,11 +26,7 @@ const Boards: FC = () => {
   return (
     <div>
       {data.map(([url, ply], i) => (
-        <iframe
-          className='lichess-iframe'
-          key={i}
-          src={`https://lichess.org/embed/game/${getGameId(url)}?theme=auto&bg=auto#${ply}`}
-        />
+        <iframe className='lichess-iframe' key={i} src={getUrl(url, ply)} />
       ))}
     </div>
   )
