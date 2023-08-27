@@ -5,8 +5,13 @@
 .lichess-iframe {
   margin-bottom: 2rem;
 
-  /* @media (min-width: 600px) { */
-  width: 600px;
-  height: 397px;
-  /* } */
+  @media (min-width: 636px) {
+    width: 600px;
+    height: 397px;
+  }
+
+  @media (max-width: 635px) {
+    width: 200px;
+    height: 304px;
+  }
 }
