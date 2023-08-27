@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Boards from './Boards'
 
 export default function Home() {

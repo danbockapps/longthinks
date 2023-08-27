@@ -1,43 +1,34 @@
 'use client'
 
-import { FC, useEffect, useRef } from 'react'
+import { FC, useEffect, useState } from 'react'
+
+type Think = [string, number]
+
+const getGameId = (url: string) => {
+  const parts = url.split('/')
+  return parts[parts.length - 1]
+}
 
 const Boards: FC = () => {
-  const ref = useRef<HTMLIFrameElement>(null)
+  const [data, setData] = useState<Think[]>([])
+
   useEffect(() => {
-    console.log('ref', ref)
-    if (ref.current) {
-      // Not working - querySelector returns null
-      const button = ref.current.querySelector('[aria-label="Next Move"]') as HTMLButtonElement
-      console.log('button', button)
-      button?.click()
-    }
+    fetch('https://danbock.net/longthinksapi/danbock')
+      .then(response => response.json())
+      .then(({ thinks }) => setData(thinks))
   }, [])
 
   return (
     <div>
-      <iframe
-        src='https://lichess.org/embed/game/d3vME4BM?theme=auto&bg=auto#46'
-        width={600}
-        height={397}
-      />
-      <iframe
-        {...{ ref }}
-        id='10928987'
-        style={{ width: '615px', height: '490px', marginTop: '20px' }}
-        src='//www.chess.com/emboard?id=10928987'
-      />
+      {data.map(([url, ply], i) => (
+        <iframe
+          className='lichess-iframe'
+          key={i}
+          src={`https://lichess.org/embed/game/${getGameId(url)}?theme=auto&bg=auto#${ply}`}
+        />
+      ))}
     </div>
   )
 }
-
-// window.addEventListener('message', e => {
-//   e['data'] &&
-//     '10928987' === e['data']['id'] &&
-//     document.getElementById(`${e['data']['id']}`) &&
-//     (document.getElementById(`${e['data']['id']}`).style.height = `${
-//       e['data']['frameHeight'] + 30
-//     }px`)
-// })
 
 export default Boards

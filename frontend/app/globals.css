@@ -18,10 +18,19 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
+  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb)))
     rgb(var(--background-start-rgb));
+}
+
+.lichess-iframe {
+  margin-bottom: 2rem;
+
+  /* TODO test other devices */
+  width: 414px;
+  height: 300px;
+
+  @media (min-width: 600px) {
+    width: 600px;
+    height: 397px;
+  }
 }
