@@ -1,8 +1,6 @@
-'use client'
-
 import { FC, useEffect, useState } from 'react'
 
-type Think = [string, number]
+export type Think = [string, number]
 
 const getGameId = (url: string) => {
   const parts = url.split('/')
