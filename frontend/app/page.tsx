@@ -13,6 +13,7 @@ export default function Home() {
 
   const onSubmit = async (username: string) => {
     setLoading(true)
+    setThinks([])
 
     try {
       const response = await fetch(`https://danbock.net/longthinksapi/${username}`)

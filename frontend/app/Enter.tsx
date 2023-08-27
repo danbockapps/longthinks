@@ -10,7 +10,13 @@ const Enter: FC<Props> = props => {
   const [username, setUsername] = useState<string>('')
 
   return (
-    <div className='flex flex-col items-center'>
+    <form
+      onSubmit={e => {
+        e.preventDefault()
+        props.onSubmit(username)
+      }}
+      className='flex flex-col items-center'
+    >
       <Typography level='h1' className='mt-10'>
         Your long thinks
       </Typography>
@@ -33,10 +39,10 @@ const Enter: FC<Props> = props => {
         <Radio disabled value='chesscom' label='Chess.com (coming soon)' />
       </RadioGroup>
 
-      <Button onClick={() => props.onSubmit(username)} loading={props.loading} className='mt-10'>
+      <Button type='submit' loading={props.loading} className='mt-10'>
         Submit
       </Button>
-    </div>
+    </form>
   )
 }
 
