@@ -2,9 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-.lichess-iframe {
-  margin-bottom: 2rem;
+body {
+  background-image: linear-gradient(to left, #f3e2c6, #eee);
+}
 
+.lichess-iframe {
   @media (min-width: 636px) {
     width: 600px;
     height: 397px;

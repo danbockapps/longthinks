@@ -21,7 +21,7 @@ const Boards: FC<Props> = props => {
     <div className='mt-10 flex flex-col items-center'>
       {props.thinks.map(([url, ply], i) => (
         <Card key={i} className='mt-5'>
-          <iframe className='lichess-iframe' src={getUrl(url, ply)} />
+          <iframe className='lichess-iframe' src={getUrl(url, ply)} frameBorder={0} />
         </Card>
       ))}
     </div>
