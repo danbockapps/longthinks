@@ -1,6 +1,6 @@
-import { Think } from '@/src/Template'
-import { Card } from '@mui/joy'
 import { FC } from 'react'
+import { Think } from './page'
+import { Card } from '@mui/joy'
 
 const getGameId = (url: string) => {
   const parts = url.split('/')
