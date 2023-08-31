@@ -1,0 +1,1 @@
+npm run build && rsync -av -e 'ssh -p 7822' out/ danbockn@mi3-ss37.a2hosting.com:~/public_html/test_longthinks
