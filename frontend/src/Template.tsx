@@ -7,7 +7,9 @@ import { useRouter } from 'next/navigation'
 import { FC, useEffect, useState } from 'react'
 
 export type Think = [string, number]
-type Site = 'lichess' | 'chesscom'
+export type Site = 'lichess' | 'chesscom'
+
+export const isSite = (site: string): site is Site => ['lichess', 'chesscom'].includes(site)
 
 interface Props {
   site?: Site
