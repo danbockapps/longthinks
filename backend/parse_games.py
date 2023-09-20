@@ -16,12 +16,15 @@ def get_color(headers, name):
         raise Exception("Player not in game")
     
 
-def parse_games(pgn, user):
+def parse_games(pgn, user, site):
     thinks = []
     games = pgn.split("\n\n\n")[:-1]
     for game in games:
         game = chess.pgn.read_game(io.StringIO(game))
-        game_id = game.headers["Site"]
+        if site == "lichess":
+            game_id = game.headers["Site"]
+        elif site == "chesscom":
+            game_id = game.headers["Link"]
         times = []
         node = game.next()
         while node is not None:
