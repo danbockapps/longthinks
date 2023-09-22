@@ -12,7 +12,7 @@ def get_games(user, site):
     elif site == "chesscom":
         return get_chesscom_games(user)
 
-@app.route('/<user>/<site>')
+@app.route("/<site>/<user>")
 def get_thinks(user, site):
     pgn = get_games(user, site)
     thinks = parse_games(pgn, user, site)
