@@ -25,18 +25,15 @@ def parse_games(pgn, user, site):
             game_id = game.headers["Site"]
         elif site == "chesscom":
             game_id = game.headers["Link"]
-        times = []
-        node = game.next()
-        while node is not None:
-            times.append(node.clock())
-            node = node.next()
         color = get_color(game.headers, user)
-        times = times[(1 - color)::2]
-        diffs = -np.diff(times)
-        tanks, = np.where(diffs > THRESHOLD)
-        tanks += 1
-        ply = tanks * 2
-        if not color:
-            ply += 1
-        thinks += [(game_id, int(p)) for p in ply]
+        node = game.next()
+        time = node.clock()
+        thinks = []
+        while node is not None:
+            if node.ply() % 2 == color:
+                new_time = node.clock()
+                if time - new_time > THRESHOLD:
+                    thinks.append((game_id, node.ply(), node.parent.board().fen()))
+                time = new_time
+            node = node.next()
     return {"thinks": thinks}
