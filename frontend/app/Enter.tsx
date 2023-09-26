@@ -1,19 +1,21 @@
+import { Site } from '@/src/Template'
 import { Button, Input, Radio, RadioGroup, Typography } from '@mui/joy'
 import { FC, useState } from 'react'
 
 interface Props {
-  onSubmit: (username: string) => void
+  onSubmit: (site: Site, username: string) => void
   loading: boolean
 }
 
 const Enter: FC<Props> = props => {
   const [username, setUsername] = useState<string>('')
+  const [site, setSite] = useState<Site>('lichess')
 
   return (
     <form
       onSubmit={e => {
         e.preventDefault()
-        props.onSubmit(username)
+        props.onSubmit(site, username)
       }}
       className='flex flex-col items-center'
     >
@@ -30,13 +32,13 @@ const Enter: FC<Props> = props => {
 
       <RadioGroup
         name='site'
-        value='lichess'
-        onChange={e => console.log(e.target.value)}
+        value={site}
+        onChange={e => setSite(e.target.value as Site)}
         className='mt-10'
         orientation='horizontal'
       >
         <Radio value='lichess' label='Lichess' />
-        <Radio disabled value='chesscom' label='Chess.com (coming soon)' />
+        <Radio value='chesscom' label='Chess.com ' />
       </RadioGroup>
 
       <Button type='submit' loading={props.loading} className='mt-10'>

@@ -29,7 +29,9 @@ const Template: FC<Props> = props => {
 
       const load = async () => {
         try {
-          const response = await fetch(`https://danbock.net/longthinksapi/${props.username}`)
+          const response = await fetch(
+            `https://danbock.net/longthinksapi/${props.site}/${props.username}`,
+          )
           const { thinks } = (await response.json()) as { thinks: Think[] }
           setThinks(thinks)
         } catch (error) {
@@ -47,7 +49,10 @@ const Template: FC<Props> = props => {
     <StyledEngineProvider injectFirst>
       {/* ☝️ Gives Tailwind css precedence over MUI */}
       <main className='container mx-auto'>
-        <Enter {...{ loading }} onSubmit={username => router.push(`/lichess/${username}`)} />
+        <Enter
+          {...{ loading }}
+          onSubmit={(site, username) => router.push(`/${site}/${username}`)}
+        />
         <Boards {...{ thinks }} />
       </main>
     </StyledEngineProvider>
