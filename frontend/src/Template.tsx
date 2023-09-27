@@ -51,6 +51,8 @@ const Template: FC<Props> = props => {
       <main className='container mx-auto'>
         <Enter
           {...{ loading }}
+          site={props.site ?? 'lichess'}
+          username={props.username}
           onSubmit={(site, username) => router.push(`/${site}/${username}`)}
         />
         <Boards {...{ thinks }} />

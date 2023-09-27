@@ -5,17 +5,22 @@ import { FC, useState } from 'react'
 interface Props {
   onSubmit: (site: Site, username: string) => void
   loading: boolean
+  site: Site
+  username?: string
 }
 
 const Enter: FC<Props> = props => {
-  const [username, setUsername] = useState<string>('')
-  const [site, setSite] = useState<Site>('lichess')
+  const [username, setUsername] = useState<string>()
+  const [site, setSite] = useState<Site>()
+
+  const processedSite = site ?? props.site
+  const processedUsername = username ?? props.username
 
   return (
     <form
       onSubmit={e => {
         e.preventDefault()
-        props.onSubmit(site, username)
+        processedSite && processedUsername && props.onSubmit(processedSite, processedUsername)
       }}
       className='flex flex-col items-center'
     >
@@ -26,7 +31,7 @@ const Enter: FC<Props> = props => {
 
       <Input
         placeholder='Enter your username...'
-        value={username}
+        value={processedUsername}
         onChange={e => setUsername(e.target.value)}
         className='w-72'
         style={{ marginTop: '2.5rem' }}
@@ -34,7 +39,7 @@ const Enter: FC<Props> = props => {
 
       <RadioGroup
         name='site'
-        value={site}
+        value={processedSite}
         onChange={e => setSite(e.target.value as Site)}
         style={{ marginTop: '2.5rem' }}
         orientation='horizontal'
