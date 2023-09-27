@@ -19,7 +19,8 @@ const Enter: FC<Props> = props => {
       }}
       className='flex flex-col items-center'
     >
-      <Typography level='h1' className='mt-10'>
+      {/* Using inline styles because the mt-10 class is weirdly prone to FOUC */}
+      <Typography level='h1' style={{ marginTop: '2.5rem' }}>
         Your long thinks
       </Typography>
 
@@ -27,21 +28,22 @@ const Enter: FC<Props> = props => {
         placeholder='Enter your username...'
         value={username}
         onChange={e => setUsername(e.target.value)}
-        className='w-72 mt-10'
+        className='w-72'
+        style={{ marginTop: '2.5rem' }}
       />
 
       <RadioGroup
         name='site'
         value={site}
         onChange={e => setSite(e.target.value as Site)}
-        className='mt-10'
+        style={{ marginTop: '2.5rem' }}
         orientation='horizontal'
       >
         <Radio value='lichess' label='Lichess' />
         <Radio value='chesscom' label='Chess.com ' />
       </RadioGroup>
 
-      <Button type='submit' loading={props.loading} className='mt-10'>
+      <Button type='submit' loading={props.loading} style={{ marginTop: '2.5rem' }}>
         Submit
       </Button>
     </form>
