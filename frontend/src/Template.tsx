@@ -6,7 +6,7 @@ import { StyledEngineProvider } from '@mui/joy'
 import { useRouter } from 'next/navigation'
 import { FC, useEffect, useState } from 'react'
 
-export type Think = [string, number]
+export type Think = [string, number, string] // url, ply, fen
 export type Site = 'lichess' | 'chesscom'
 
 export const isSite = (site: string): site is Site => ['lichess', 'chesscom'].includes(site)
