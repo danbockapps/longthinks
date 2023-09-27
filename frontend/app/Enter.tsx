@@ -31,7 +31,7 @@ const Enter: FC<Props> = props => {
 
       <Input
         placeholder='Enter your username...'
-        value={processedUsername}
+        value={processedUsername ?? ''}
         onChange={e => setUsername(e.target.value)}
         className='w-72'
         style={{ marginTop: '2.5rem' }}
