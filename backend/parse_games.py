@@ -28,7 +28,6 @@ def parse_games(pgn, user, site):
         color = get_color(game.headers, user)
         node = game.next()
         time = node.clock()
-        thinks = []
         while node is not None:
             if node.ply() % 2 == color:
                 new_time = node.clock()
