@@ -32,12 +32,7 @@ def parse_games(pgn, user, site):
             if node.ply() % 2 == color:
                 new_time = node.clock()
                 if time - new_time > THRESHOLD:
-                    move = node.move
-                    san_move = node.parent.board().san(move)
-                    orig_sq = chess.square_name(move.from_square)
-                    dest_sq = chess.square_name(move.to_square)
-                    time_spent = round(time - new_time)
-                    thinks.append((game_id, node.ply(), node.parent.board().fen(), san_move, orig_sq, dest_sq, time_spent))
+                    thinks.append((game_id, node.ply(), node.parent.board().fen()))
                 time = new_time
             node = node.next()
     return {"thinks": thinks}
