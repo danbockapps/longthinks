@@ -18,7 +18,7 @@ def get_color(headers, name):
 
 def parse_games(pgn, user, site):
     thinks = []
-    games = pgn.split("\n\n\n")[:-1]
+    games = pgn.split("\n\n\n")[:-1][:50]
     for game in games:
         game = chess.pgn.read_game(io.StringIO(game))
         if site == "lichess":
@@ -34,8 +34,8 @@ def parse_games(pgn, user, site):
                 if time - new_time > THRESHOLD:
                     move = node.move
                     san_move = node.parent.board().san(move)
-                    orig_sq = chess.square_name(move.from_square)
-                    dest_sq = chess.square_name(move.to_square)
+                    orig_sq = chess.square_name(node.parent.move.from_square)
+                    dest_sq = chess.square_name(node.parent.move.to_square)
                     time_spent = round(time - new_time)
                     thinks.append((game_id, node.ply(), node.parent.board().fen(), san_move, orig_sq, dest_sq, time_spent))
                 time = new_time
