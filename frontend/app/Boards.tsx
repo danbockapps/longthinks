@@ -20,11 +20,11 @@ const Boards: FC<Props> = props => {
             <Chessboard
               position={fen}
               arePiecesDraggable={false}
-              boardOrientation={ply % 2 === 0 ? 'white' : 'black'}
+              boardOrientation={ply % 2 === 0 ? 'black' : 'white'}
               customDarkSquareStyle={{ backgroundColor: '#779955' }}
               customLightSquareStyle={{ backgroundColor: '#e9eecd' }}
             />
-            <a href={url} className='absolute h-72 w-72 z-10' />
+            <a href={url} className='absolute h-72 w-72 z-10' target='_blank' />
           </Card>
         ),
       )}
@@ -39,7 +39,7 @@ const getGameId = (url: string) => {
 
 const getLichessUrl = (url: string, ply: number) =>
   `https://lichess.org/embed/game/${getGameId(url)}/${
-    ply % 2 === 0 ? 'white' : 'black'
-  }?theme=auto&bg=auto#${ply}`
+    ply % 2 === 0 ? 'black' : 'white'
+  }?theme=auto&bg=auto#${ply - 1}`
 
 export default Boards
