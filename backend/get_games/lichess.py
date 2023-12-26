@@ -2,7 +2,7 @@ import requests
 
 url = "https://lichess.org/api/games/user/"
 params = {
-    "max": 10,
+    "max": 50,
     "clocks": True,
     "perfType": "blitz",
 }
