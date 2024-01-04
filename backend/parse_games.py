@@ -18,6 +18,11 @@ def parse_games(pgn, user, site):
     games = pgn.split("\n\n\n")[:-1]
     for game in games:
         game = chess.pgn.read_game(io.StringIO(game))
+
+        if "/" in game.headers['TimeControl']:
+            # This is a correspondence game, so we skip it
+            continue
+
         if site == "lichess":
             game_id = game.headers["Site"]
         elif site == "chesscom":
