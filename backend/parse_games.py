@@ -37,6 +37,11 @@ def parse_games(pgn, user, site):
             secs = int(tc[0])
         thresh = secs / 10
         node = game.next()
+
+        if node is None:
+            # This can happen if the game was aborted
+            continue
+
         time = node.clock()
         while node is not None:
             if node.ply() % 2 == color:
